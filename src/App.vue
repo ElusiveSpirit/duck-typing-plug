@@ -43,20 +43,22 @@ export default {
     submitForm () {
       this.loading = true
       if (this.newEmail && this.newEmail.includes('@') && this.newEmail.length > 5) {
-        try {
-          console.log(refs.emails.push({
-            email: this.newEmail,
-            createdAt: new Date()
-          }))
+        refs.emails.push({
+          email: this.newEmail,
+          createdAt: new Date().toUTCString()
+        })
+        .then(response => {
           this.success = true
           this.$cookie.set('email', this.newEmail, 60)
           this.email = this.newEmail
           this.newEmail = ''
-        } catch (e) {
+          this.loading = false
+        })
+        .catch(e => {
           console.log(e)
-        }
+          this.loading = false
+        })
       }
-      this.loading = false
     },
     enterNewEmail () {
       this.email = null

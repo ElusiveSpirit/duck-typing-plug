@@ -12,5 +12,6 @@ export const firebaseApp = Firebase.initializeApp({
 export const db = firebaseApp.database()
 
 export const refs = {
-  emails: db.ref('emails')
+  emails: db.ref('emails'),
+  refLinks: db.ref('refLinks')
 }
